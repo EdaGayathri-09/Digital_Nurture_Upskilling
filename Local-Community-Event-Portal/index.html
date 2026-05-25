@@ -4,18 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Local Community Event Portal</title>
+    <style>
+        #welcomebanner{
+            background-color: blue;
+            color:white;
+            padding:15px;
+            font-size:20px;
+            margin:15px;
+        }
+        .highlight{
+            background-color: yellow;
+            font-weight:bold;
+            padding:3px;
+        }
+    </style>
 </head>
 <body>
     <!--Navigation Section-->
     <nav>
-        <h1>Local Community Event Portal</h1>
+        <a href="#home">Home</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+        <a href="help.html" target="_blank">Help</a>
     </nav>
+
+    <!--Welcome Banner-->
+    <div id="welcomebanner">
+        Welcome Back, Gayathri! Explore your community events.
+    </div>
+    <hr>
+
+    <!--Special Offers-->
+    <p class="highlight">
+        Today's community event: Community clean-up drive
+    </p>
+    <p>
+        Special Offer:
+        <span style="color:red; font-weight:bold;">
+            Early bird registration is now open!
+        </span>
+    </p>
+    <p class="highlight">
+        Don't miss upcoming weekend activities
+    </p>
 
     <!--Main Section-->
     <main>
-        <section>
-            <h1>Welcome</h1>
+        <section id="home">
+            <h1>Home</h1>
             <p>Welcome to local community event portal</p>
+        </section>
+
+        <section id="events">
+            <h1>Events</h1>
+            <p>Check your upcoming events here</p>
+        </section>
+
+        <section id="contact">
+            <h1>Contact</h1>
+            <p>Contact your city council for more information</p>
         </section>
     </main>
 
