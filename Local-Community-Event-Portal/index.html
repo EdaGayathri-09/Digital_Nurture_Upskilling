@@ -17,7 +17,53 @@
             font-weight:bold;
             padding:3px;
         }
+        .event-img{
+            border:2px solid black;
+            border-radius:8px;
+            padding:3px;
+        }
+        #registrationform{
+            margin:10px;
+            max-width:500px;
+            padding:20px;
+        }
+        fieldset{
+            border:2px solid black;
+            border-radius: 10px;
+            padding:15px;
+        }
+        legend{
+            font-weight:bold;
+            color:black;
+        }
+        input,select{
+            width:100%;
+            padding:8px;
+            margin:8px;
+            box-sizing:border-box;
+        }
+        textarea{
+            width:100%;
+            padding:8px;
+            margin:8px;
+            height:100px;
+            box-sizing:border-box;
+        }
+        button{
+            padding:10px;
+            margin:10px 0 0 10px;
+            border:2px solid black;
+            border-radius:10px;
+        }
     </style>
+    <script>
+        function showMessage(event){
+            event.preventDefault();
+            let name=document.getElementById("name").value;
+            let eventType=document.getElementById("eventType").value;
+            document.getElementById("outputMessage").innerHTML="Thank you "+name+"! You have successfully registered for "+eventType+".";
+        }
+    </script>
 </head>
 <body>
     <!--Navigation Section-->
@@ -39,9 +85,8 @@
         Today's community event: Community clean-up drive
     </p>
     <p>
-        Special Offer:
         <span style="color:red; font-weight:bold;">
-            Early bird registration is now open!
+            Special Offer: Early bird registration is now open!
         </span>
     </p>
     <p class="highlight">
@@ -58,17 +103,71 @@
         <section id="events">
             <h1>Events</h1>
             <p>Check your upcoming events here</p>
+            <!--Image gallery table-->
+            <table border="1" style="width:100%; text-align:center; margin-top:20px;">
+                <caption style="margin-bottom:15px;"><b>Community Event Gallery</b></caption>
+                <tr>
+                    <td>
+                        <img src="images/clean up drive.jpg" alt="Clean up drive" title="Clean up drive" width="150" class="event-img">
+                        <p>Clean Up Drive</p>
+                    </td>
+                    <td>
+                        <img src="images/tree plantation.jpg" alt="Tree Plantation" title="Tree Plantation" width="150" class="event-img">
+                        <p>Tree Plantation</p>
+                    </td>
+                    <td>
+                        <img src="images/health camp.jpg" alt="Health Camp" title="Health Camp" width="150" class="event-img">
+                        <p>Health Camp</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="images/blood donation.jpg" alt="Blood Donation" title="Blood Donation" width="150" class="event-img">
+                        <p>Blood Donation</p>
+                    </td>
+                    <td>
+                        <img src="images/awareness program.jpg" alt="Awareness Program" title="Awareness Program" width="150" class="event-img">
+                        <p>Awareness Program</p>
+                    </td>
+                    <td>
+                        <img src="images/community meeting.jpg" alt="Community Meeting" title="Community Meeting" width="150" class="event-img">
+                        <p>Community Meeting</p>
+                    </td>
+                </tr>
+            </table>
         </section>
 
         <section id="contact">
             <h1>Contact</h1>
             <p>Contact your city council for more information</p>
         </section>
+
+        <section id="register">
+            <form id="registrationform" onsubmit="return showMessage(event)">
+                <fieldset>
+                    <legend>Details</legend>
+                    <input type="text" id="name" placeholder="Enter your name" required autofocus>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                    <input type="date" id="date" required>
+                    <select id="eventType" required>
+                        <option value="">Select Event Type</option>
+                        <option value="Clean Up Drive">Clean Up Drive</option>
+                        <option value="Tree Plantation">Tree Plantation</option>
+                        <option value="Health Camp">Health Camp</option>
+                    </select>
+                    <textarea id="message" placeholder="Enter your message"></textarea>
+                </fieldset>
+                <button type="Submit">Register</button>
+                <br>
+                <output id="outputMessage"></output>
+            </form>
+
+        </section>
     </main>
 
     <!--Footer Section-->
-    <footer>
-        <p>&copy; 2026 Local Community Portal</p>
+    <footer style="text-align:center;">
+        <p>&copy; 2026 Local Community Portal. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
