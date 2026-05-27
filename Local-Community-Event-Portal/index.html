@@ -136,6 +136,42 @@
             alert("Preferences cleared!");
             location.reload();
         }
+        //Geolocation function
+        function findLocation(){
+            let options={
+                enableHighAccuracy:true,
+                timeout:5000,
+                maximumAge:0
+            };
+            //check browser support
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(
+                    showPosition,
+                    showError,
+                    options
+                );
+            }else{
+                document.getElementById("locationResult").innerHTML="Geolocation is not supported.";
+            }
+        }
+        //success function
+        function showPosition(position){
+            let latitude=position.coords.latitude;
+            let longitude=position.coords.longitude;
+            document.getElementById("locationResult").innerHTML="Latitude:"+latitude+"<br>Longitude:"+longitude;
+        }
+        //Error handling function
+        function showError(error){
+            if(error.code==1){
+                alert("Permission denied by user.");
+            }else if(error.code==2){
+                alert("Location information unavailable.");
+            }else if(error.code==3){
+                alert("Request timed out");
+            }else{
+                alert("Unknown error occured.");
+            }
+        }
     </script>
 </head>
 <body>
@@ -215,6 +251,15 @@
                 Your browser does not support the video tag.
             </video>
             <p id="videoMessage"></p>
+        </section>
+        <hr>
+
+        <section id="location">
+            <h1>Find Nearby Events</h1>
+            <button onclick="findLocation()">
+                Find Nearby Events
+            </button>
+            <p id="locationResult"></p>
         </section>
         <hr>
 
