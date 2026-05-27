@@ -63,6 +63,10 @@
             display:block;
             margin-top:10px;
         }
+        video{
+            border:2px solid black;
+            border-radius:10px;
+        }
     </style>
     <script>
         function showMessage(event){
@@ -103,6 +107,14 @@
         function countCharacters(){
             let text=document.getElementById("feedbackMessage").value;
             document.getElementById("charCount").innerHTML=text.length;
+        }
+        //oncanplay event
+        function videoReady(){
+            document.getElementById("videoMessage").innerHTML="Video ready to play!";
+        }
+        //onbeforeunload event
+        window.onbeforeunload=function(){
+            return "You have unsaved changes";
         }
     </script>
 </head>
@@ -174,6 +186,15 @@
                     </td>
                 </tr>
             </table>
+        </section>
+        <hr>
+
+        <section id="promo">
+            <h1>Community Event Promo</h1>
+            <video src="videos/11256472-hd_1920_1080_30fps.mp4" type="video/mp4" height="300px" controls oncanplay="videoReady()">
+                Your browser does not support the video tag.
+            </video>
+            <p id="videoMessage"></p>
         </section>
         <hr>
 
