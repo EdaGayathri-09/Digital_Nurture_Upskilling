@@ -1,3 +1,25 @@
+/*Navigation Styles*/
+nav{
+    background-color:beige;
+    padding:12px;
+    text-align:center;
+    border:1px solid black;
+    margin:15px;
+    border-radius:5px;
+}
+nav a{
+    text-decoration: none;
+    font-weight: bold;
+    margin:0 10px;
+}
+
+/*Home Styles*/
+#home, #events, #promo, #location, #register, #feedback, #contact {
+    margin:15px;
+    padding:20px;
+    border:1px solid black;
+    border-radius:5px;
+}
 /*Welcome Banner Styles*/
 #welcomebanner{
     background-color: blue;
@@ -5,7 +27,8 @@
     padding:15px;
     font-size:20px;
     margin:15px;
-    border:4px solid orange
+    border:8px solid orange;
+    border-radius:5px;
 }
 
 /*Highlight Message Styles*/
