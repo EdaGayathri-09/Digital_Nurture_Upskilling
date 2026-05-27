@@ -15,6 +15,7 @@ nav a{
 
 /*Home Styles*/
 #home, #events, #promo, #location, #register, #feedback, #contact {
+    background-color: rgba(255,255,255,0.9);
     margin:15px;
     padding:20px;
     border:1px solid black;
@@ -103,4 +104,10 @@ output{
 video{
     border:2px solid black;
     border-radius:10px;
+}
+footer{
+    border:1px solid black;
+    border-radius:5px;
+    background-color: rgba(255,255,255,0.9);
+    margin:15px;
 }
