@@ -85,7 +85,7 @@ tr:nth-child(even) td{
     padding:3px;
 }
 /*Home Styles*/
-#home, #events, #promo, #location, #register, #feedback, #contact {
+#home, #events, #promo, #location, #register, #feedback, #contact, #news{
     background-color: rgba(255,255,255,0.9);
     margin:15px;
     padding:20px;
@@ -101,7 +101,13 @@ tr:nth-child(even) td{
     border-radius:8px;
     padding:3px;
 }
-
+/*Bulletin Styles*/
+.newsArticle{
+    column-count: 2;
+    column-gap: 30px;
+    column-rule: 1px solid gray;
+    text-align: justify;
+}
 /*Form Styles*/
 #registrationform, #feedbackform{
     margin:10px;
