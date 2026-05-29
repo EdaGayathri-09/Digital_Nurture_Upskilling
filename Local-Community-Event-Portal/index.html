@@ -132,12 +132,13 @@
                     <input type="text" id="name" placeholder="Enter your name" required autofocus>
                     <input type="email" id="email" placeholder="Enter your email" required>
                     <input type="date" id="date" required>
-                    <select id="eventType" required onchange="showFee(); savePreference()">
+                    <select id="eventType" required onchange="showFee(); savePreference(); showEventDetails()">
                         <option value="">Select Event Type</option>
                         <option value="Clean Up Drive">Clean Up Drive</option>
                         <option value="Tree Plantation">Tree Plantation</option>
                         <option value="Health Camp">Health Camp</option>
                     </select>
+                    <p id="eventInfo"></p>
                     <p id="feeDisplay"></p>
                     <textarea id="message" placeholder="Enter your message"></textarea>   
                     <button type="submit" onclick="showConfirmation()">Register</button>  

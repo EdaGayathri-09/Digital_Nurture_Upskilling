@@ -30,7 +30,19 @@ function showFee(){
 }
 //onclick event
 function showConfirmation(){
-    alert("Your registration has been submitted!");
+    let selectedEvent=document.getElementById("eventType").value;
+    if(selectedEvent===""){
+        alert("Please select an event!");
+        return;
+    }
+    let event=events[selectedEvent];
+    if(event.seats>0){
+        event.seats--;
+        alert("Your registration has been submitted!");
+        showEventDetails();
+    }else{
+        alert("No seats available!");
+    }
 }
 //ondblclick event
 function enlargeImage(image){
@@ -60,6 +72,7 @@ window.onload = function(){
     let savedEvent=localStorage.getItem("preferredEvent");
     if(savedEvent){
         document.getElementById("eventType").value=savedEvent;
+        showEventDetails();
         showFee();
     }
 }
@@ -104,5 +117,19 @@ function showError(error){
         alert("Request timed out");
     }else{
         alert("Unknown error occured.");
+    }
+}
+//Event data
+const events={
+    "Clean Up Drive":{date: "2026-06-15",seats:50},
+    "Tree Plantation":{date: "2026-06-20",seats:40},
+    "Health Camp":{date:"2026-06-25",seats:30}
+};
+//show event details
+function showEventDetails(){
+    let selectedEvent=document.getElementById("eventType").value;
+    if(selectedEvent!==""){
+        let event=events[selectedEvent];
+        document.getElementById("eventInfo").innerHTML=`Event:${selectedEvent}<br> Date:${event.date}<br> Available seats:${event.seats}`;
     }
 }
