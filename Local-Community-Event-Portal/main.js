@@ -54,9 +54,9 @@ function showError(error){
 
 //Event data
 const events={
-    "Clean Up Drive":{date: "2026-05-16",seats:50,fee:300},
-    "Tree Plantation":{date: "2026-06-20",seats:40,fee:400},
-    "Health Camp":{date:"2026-06-25",seats:30,fee:500}
+    "Clean Up Drive":{date: "2026-05-16",seats:50,fee:300,category:"Environment"},
+    "Tree Plantation":{date: "2026-06-20",seats:40,fee:400,category:"Environment"},
+    "Health Camp":{date:"2026-06-25",seats:30,fee:500,category:"Health"}
 };
 
 function showMessage(event){
@@ -79,13 +79,12 @@ function showConfirmation(){
         if(selectedEvent===""){
             throw new Error("Please select an event!");
         }
-        let event=events[selectedEvent];
-        if(event.seats<=0){
-            throw new Error("No seats available!");
+        if(registerUser(selectedEvent)){
+            alert("Your registration has been submitted!");
+            showEventDetails();
+        }else{
+            throw new Error("No seats available");
         }
-        event.seats--;
-        alert("Your registration has been submitted!");
-        showEventDetails();
    }catch(error){
         alert(error.message);
    }
@@ -141,3 +140,58 @@ function loadValidEvents(){
         }
     });
 }
+
+//JavaScript Exercise:4 
+//They do not reflect to frontend
+//Adding event
+function addEvent(name,date,seats,fee,category){
+    events[name]={date,seats,fee,category};
+    console.log(name+" added successfully");
+}
+addEvent("Blood Donation Camp","2026-07-10",100,200,"Health");
+//Register user
+function registerUser(eventName){
+    let event=events[eventName];
+    if(event.seats>0){
+        event.seats--;
+        return true;
+    }
+    return false;
+}
+//filter events by category
+/*function filterEventsByCategory(category){
+    return Object.entries(events).filter(
+        ([name,event])=>event.category===category
+    );
+}
+console.log(filterEventsByCategory("Health"));*/
+//closure for registration tracking
+function createRegistrationTracker(){
+    let totalRegistrations=0;
+    return function(){
+        totalRegistrations++;
+        return totalRegistrations;
+    };
+}
+const registrationTracker=createRegistrationTracker();
+console.log(registrationTracker());
+console.log(registrationTracker());
+console.log(registrationTracker());
+
+//filter events by category using callback
+function filterEventsByCategory(
+    category,
+    callback
+){
+    let filteredEvents=
+        Object.entries(events).filter(
+            ([name,event])=>event.category === category
+        );
+    callback(filteredEvents);
+}
+//create callback
+function displayFilteredEvents(result){
+    console.log(result);
+}
+//call
+filterEventsByCategory("Environment",displayFilteredEvents);
