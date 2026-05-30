@@ -1,57 +1,8 @@
 // Console message
 console.log("Welcome to the Community Portal");
-
-//Registration success message
-function showMessage(event){
-    event.preventDefault();
-    let name=document.getElementById("name").value;
-    let eventType=document.getElementById("eventType").value;
-    document.getElementById("outputMessage").innerHTML="Thank you "+name+"! You have successfully registered for "+eventType+".";
-}
-//onblur event
-function validatePhone(){
-    let phone=document.getElementById("phone").value;
-    if(phone.length!=10 || isNaN(phone)){
-        alert("Please enter a valid 10-digit phone number");
-    }
-}
-//onchange event
-function showFee(){
-    let fee="";
-    let eventType=document.getElementById("eventType").value;
-    if(eventType==="Clean Up Drive"){
-        fee=300;
-    }else if(eventType==="Tree Plantation"){
-        fee=400;
-    }else if(eventType==="Health Camp"){
-        fee=500;
-    }
-    document.getElementById("feeDisplay").innerHTML="Event Fee: &#8377;"+ fee;
-}
-//onclick event
-function showConfirmation(){
-    let selectedEvent=document.getElementById("eventType").value;
-    if(selectedEvent===""){
-        alert("Please select an event!");
-        return;
-    }
-    let event=events[selectedEvent];
-    if(event.seats>0){
-        event.seats--;
-        alert("Your registration has been submitted!");
-        showEventDetails();
-    }else{
-        alert("No seats available!");
-    }
-}
 //ondblclick event
 function enlargeImage(image){
     image.style.width="500px";
-}
-//keyboard event
-function countCharacters(){
-    let text=document.getElementById("feedbackMessage").value;
-    document.getElementById("charCount").innerHTML=text.length;
 }
 //oncanplay event
 function videoReady(){
@@ -60,28 +11,6 @@ function videoReady(){
 //onbeforeunload event
 window.onbeforeunload=function(){
     return "You have unsaved changes";
-}
-//save selected event type
-function savePreference(){
-    let selectedEvent=document.getElementById("eventType").value;
-    localStorage.setItem("preferredEvent",selectedEvent);
-}
-//load saved preference when page loads
-window.onload = function(){
-    alert("Page fully loaded!")
-    let savedEvent=localStorage.getItem("preferredEvent");
-    if(savedEvent){
-        document.getElementById("eventType").value=savedEvent;
-        showEventDetails();
-        showFee();
-    }
-}
-//clear localStorage and sessionStorage
-function clearPreferences(){
-    localStorage.clear();
-    sessionStorage.clear();
-    alert("Preferences cleared!");
-    location.reload();
 }
 //Geolocation function
 function findLocation(){
@@ -119,17 +48,96 @@ function showError(error){
         alert("Unknown error occured.");
     }
 }
+
+//Form related exercises
+//Registration success message
+
 //Event data
 const events={
-    "Clean Up Drive":{date: "2026-06-15",seats:50},
-    "Tree Plantation":{date: "2026-06-20",seats:40},
-    "Health Camp":{date:"2026-06-25",seats:30}
+    "Clean Up Drive":{date: "2026-05-16",seats:50,fee:300},
+    "Tree Plantation":{date: "2026-06-20",seats:40,fee:400},
+    "Health Camp":{date:"2026-06-25",seats:30,fee:500}
 };
+
+function showMessage(event){
+    event.preventDefault();
+    let name=document.getElementById("name").value;
+    let eventType=document.getElementById("eventType").value;
+    document.getElementById("outputMessage").innerHTML="Thank you "+name+"! You have successfully registered for "+eventType+".";
+}
+//onblur event
+function validatePhone(){
+    let phone=document.getElementById("phone").value;
+    if(phone.length!=10 || isNaN(phone)){
+        alert("Please enter a valid 10-digit phone number");
+    }
+}
+//onclick event
+function showConfirmation(){
+   try{
+        let selectedEvent=document.getElementById("eventType").value;
+        if(selectedEvent===""){
+            throw new Error("Please select an event!");
+        }
+        let event=events[selectedEvent];
+        if(event.seats<=0){
+            throw new Error("No seats available!");
+        }
+        event.seats--;
+        alert("Your registration has been submitted!");
+        showEventDetails();
+   }catch(error){
+        alert(error.message);
+   }
+}
+//keyboard event
+function countCharacters(){
+    let text=document.getElementById("feedbackMessage").value;
+    document.getElementById("charCount").innerHTML=text.length;
+}
+//save selected event type
+function savePreference(){
+    let selectedEvent=document.getElementById("eventType").value;
+    localStorage.setItem("preferredEvent",selectedEvent);
+}
+//load saved preference when page loads
+window.onload = function(){
+    alert("Page fully loaded!");
+    loadValidEvents();
+    let savedEvent=localStorage.getItem("preferredEvent");
+    if(savedEvent && events[savedEvent]){
+        let eventDate=new Date(events[savedEvent].date);
+        let today=new Date();
+        if(eventDate>today && events[savedEvent].seats>0){
+            document.getElementById("eventType").value=savedEvent;
+            showEventDetails();
+        }
+    }
+}
+//clear localStorage and sessionStorage
+function clearPreferences(){
+    localStorage.clear();
+    sessionStorage.clear();
+    alert("Preferences cleared!");
+    location.reload();
+}
 //show event details
 function showEventDetails(){
     let selectedEvent=document.getElementById("eventType").value;
     if(selectedEvent!==""){
         let event=events[selectedEvent];
-        document.getElementById("eventInfo").innerHTML=`Event:${selectedEvent}<br> Date:${event.date}<br> Available seats:${event.seats}`;
+        document.getElementById("eventInfo").innerHTML=`Event:${selectedEvent}<br> Date:${event.date}<br> Available seats:${event.seats}<br> Fee:${event.fee}`;
     }
+}
+//show only valid events
+function loadValidEvents(){
+    let dropdown=document.getElementById("eventType");
+    dropdown.innerHTML='<option value="">Select Event Type</option>';
+    let today=new Date();
+    Object.entries(events).forEach(([name,event])=>{
+        let eventDate=new Date(event.date);
+        if(eventDate>today && event.seats>0){
+            dropdown.innerHTML+=`<option value="${name}"> ${name}</option>`;
+        }
+    });
 }
