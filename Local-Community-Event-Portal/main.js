@@ -222,3 +222,37 @@ Object.entries(demoEvent).forEach(([KeyboardEvent,value])=>{
     console.log(key+":"+value);
 });
 
+//Exercise 6:Arrays and Methods
+let communityEvents=[
+    {
+        name:"Music Night",
+        category:"Music"
+    },
+    {
+        name:"Workshop on Baking",
+        category:"Workshop"
+    },
+    {
+        name:"Music Festival",
+        category:"Music"
+    }
+];
+communityEvents.push({
+    name:"Guitar Concert",
+    category:"Music"
+});
+console.log("After push:");
+console.log(communityEvents);
+
+let musicEvents=communityEvents.filter(
+    event=>event.category==="Music"
+);
+console.log("Music Events:");
+console.log(musicEvents);
+
+let displayCards=communityEvents.map(
+    event=>`Event:${event.name}`
+);
+console.log("Display Cards:");
+console.log(displayCards);
+
