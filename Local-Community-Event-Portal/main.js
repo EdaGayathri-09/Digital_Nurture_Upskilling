@@ -104,7 +104,7 @@ function savePreference(){
 window.onload = function(){
     alert("Page fully loaded!");
     loadValidEvents();
-    displayEvents();
+    displayEvents(events);
     let savedEvent=localStorage.getItem("preferredEvent");
     if(savedEvent && events[savedEvent]){
         let eventDate=new Date(events[savedEvent].date);
@@ -181,10 +181,12 @@ console.log(registrationTracker());
 console.log(registrationTracker());
 
 //filter events by category using callback
-function filterEventsByCategory(
-    category,
-    callback
-){
+function filterEventsByCategory(category,callback)
+{
+    if(category==="All"){
+        callback(Object.entries(events));
+        return;
+    }
     let filteredEvents=
         Object.entries(events).filter(
             ([name,event])=>event.category === category
@@ -192,9 +194,10 @@ function filterEventsByCategory(
     callback(filteredEvents);
 }
 //create callback
-function displayFilteredEvents(result){
+//Implemented this function as part of exercise 8
+/*function displayFilteredEvents(result){
     console.log(result);
-}
+}*/
 //call
 filterEventsByCategory("Environment",displayFilteredEvents);
 
@@ -259,10 +262,10 @@ console.log("Display Cards:");
 console.log(displayCards);
 
 //Exercise 7:DOM Manipulation
-function displayEvents(){
+function displayEvents(eventsToDisplay){
     const container=document.querySelector("#eventContainer");
     container.innerHTML="";
-    Object.entries(events).forEach(([name,event])=>{
+    Object.entries(eventsToDisplay).forEach(([name,event])=>{
         const card=document.createElement("div");
         card.innerHTML=`
             <h3>${name}</h3>
@@ -275,4 +278,23 @@ function displayEvents(){
         card.style.margin = "10px";
         container.appendChild(card);
     })
+}
+
+//Exercise 8:Event Handling
+function displayFilteredEvents(result){
+    const container = document.querySelector("#eventContainer");
+    container.innerHTML = "";
+    result.forEach(([name,event])=>{
+        const card=document.createElement("div");
+        card.innerHTML = `
+            <h3>${name}</h3>
+            <p>Date: ${event.date}</p>
+            <p>Seats: ${event.seats}</p>
+            <p>Fee: ₹${event.fee}</p>
+        `;
+        card.style.border = "1px solid black";
+        card.style.padding = "10px";
+        card.style.margin = "10px";
+        container.appendChild(card);
+    });
 }

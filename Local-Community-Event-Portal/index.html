@@ -96,7 +96,13 @@
 
         <section id="dynamicEvents">
             <h1>Check your upcoming events here</h1>
-             <div id="eventContainer"></div>
+                <label>Filter By Category:</label>
+                <select id="categoryFilter" onchange="filterEventsByCategory(this.value,displayFilteredEvents)">
+                    <option value="All">All</option>
+                    <option value="Environment">Environment</option>
+                    <option value="Health">Health</option>
+                </select>
+            <div id="eventContainer"></div>
         </section>
 
         <section id="news">
