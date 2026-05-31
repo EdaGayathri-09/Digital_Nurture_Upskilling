@@ -195,3 +195,30 @@ function displayFilteredEvents(result){
 }
 //call
 filterEventsByCategory("Environment",displayFilteredEvents);
+
+//Exercise 5:Objects and Prototype
+class Event{
+    constructor(name,date,seats,fee,category){
+        this.name=name;
+        this.date=date;
+        this.seats=seats;
+        this.fee=fee;
+        this.category=category;
+    }
+}
+Event.prototype.checkAvailability=function(){
+    if(this.seats>0) return "Seats Available";
+    return "No Seats Available";
+};
+const demoEvent=new Event(
+    "Community Meeting",
+    "2026-07-10",
+    25,
+    100,
+    "Social"
+);
+console.log(demoEvent.checkAvailability());
+Object.entries(demoEvent).forEach(([KeyboardEvent,value])=>{
+    console.log(key+":"+value);
+});
+
