@@ -199,7 +199,7 @@ function filterEventsByCategory(category,callback)
     console.log(result);
 }*/
 //call
-filterEventsByCategory("Environment",displayFilteredEvents);
+//filterEventsByCategory("Environment",displayFilteredEvents);
 
 //Exercise 5:Objects and Prototype
 class Event{
@@ -223,7 +223,7 @@ const demoEvent=new Event(
     "Social"
 );
 console.log(demoEvent.checkAvailability());
-Object.entries(demoEvent).forEach(([Key,value])=>{
+Object.entries(demoEvent).forEach(([key,value])=>{
     console.log(key+":"+value);
 });
 
@@ -297,4 +297,41 @@ function displayFilteredEvents(result){
         card.style.margin = "10px";
         container.appendChild(card);
     });
+}
+
+//Exercise 9: Async JS, Promises, Async/Await 
+
+//Promis version(.then and .catch)
+function fetchEvents(){
+    document.getElementById("loading").innerHTML="Loading...";
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response=>response.json())
+    .then(data=>{
+        document.getElementById("loading").innerHTML="";
+        console.log(data);
+        document.getElementById("apiEvents").innerHTML=data.map(user=>`<p>${user.name}</p>`).join("");
+    })
+    .catch(error=>{
+        document.getElementById("loading").innerHTML="Error loading data";
+        console.error(error);
+    });
+}
+//Async/Await version
+async function fetchEventsAsync(){
+    try{
+        document.getElementById("loading").innerHTML = "Loading...";
+        let response =await fetch("https://jsonplaceholder.typicode.com/users");
+        let data =await response.json();
+        document.getElementById("loading").innerHTML = "";
+        document.getElementById("apiEvents").innerHTML =
+                data.map(
+                    user => `<p>${user.name}</p>`
+                ).join("");
+    }
+    catch(error){
+        document.getElementById("loading")
+                .innerHTML =
+                "Error loading data";
+        console.error(error);
+    }
 }

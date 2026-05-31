@@ -90,7 +90,7 @@ tr:nth-child(even) td{
     padding:3px;
 }
 /*Home Styles*/
-#home, #events, #promo, #location, #register, #feedback, #contact, #news,#dynamicEvents{
+#home, #events, #promo, #location, #register, #feedback, #contact, #news,#dynamicEvents, #apiDemo{
     background-color: rgba(255,255,255,0.9);
     margin:15px;
     padding:20px;
