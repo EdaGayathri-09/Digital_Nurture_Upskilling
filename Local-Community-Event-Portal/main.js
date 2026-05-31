@@ -82,6 +82,7 @@ function showConfirmation(){
         if(registerUser(selectedEvent)){
             alert("Your registration has been submitted!");
             showEventDetails();
+            displayEvents();
         }else{
             throw new Error("No seats available");
         }
@@ -103,6 +104,7 @@ function savePreference(){
 window.onload = function(){
     alert("Page fully loaded!");
     loadValidEvents();
+    displayEvents();
     let savedEvent=localStorage.getItem("preferredEvent");
     if(savedEvent && events[savedEvent]){
         let eventDate=new Date(events[savedEvent].date);
@@ -218,7 +220,7 @@ const demoEvent=new Event(
     "Social"
 );
 console.log(demoEvent.checkAvailability());
-Object.entries(demoEvent).forEach(([KeyboardEvent,value])=>{
+Object.entries(demoEvent).forEach(([Key,value])=>{
     console.log(key+":"+value);
 });
 
@@ -256,3 +258,21 @@ let displayCards=communityEvents.map(
 console.log("Display Cards:");
 console.log(displayCards);
 
+//Exercise 7:DOM Manipulation
+function displayEvents(){
+    const container=document.querySelector("#eventContainer");
+    container.innerHTML="";
+    Object.entries(events).forEach(([name,event])=>{
+        const card=document.createElement("div");
+        card.innerHTML=`
+            <h3>${name}</h3>
+            <p>Date: ${event.date}</p>
+            <p>Seats: ${event.seats}</p>
+            <p>Fee: ₹${event.fee}</p>
+        `;
+        card.style.border = "1px solid black";
+        card.style.padding = "10px";
+        card.style.margin = "10px";
+        container.appendChild(card);
+    })
+}
