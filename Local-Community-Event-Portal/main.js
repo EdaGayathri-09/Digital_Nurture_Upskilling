@@ -335,3 +335,11 @@ async function fetchEventsAsync(){
         console.error(error);
     }
 }
+//Excersice 10:Modern js features
+/*let {date,seats,fee} = events[selectedEvent];
+
+document.getElementById("eventInfo").innerHTML =
+`Event:${selectedEvent}
+ Date:${date}
+ Available seats:${seats}
+ Fee:${fee}`;*/
