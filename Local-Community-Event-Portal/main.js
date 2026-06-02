@@ -401,3 +401,38 @@ function validateRegistrationForm(){
     return valid;
 }
 */
+//Exercise 12: AJAX and FetchAPI
+function submitRegistration(){
+    let form= document.getElementById("registrationform");
+    let userData={
+        name: form.elements["name"].value,
+        email: form.elements["email"].value,
+        event: form.elements["eventType"].value
+    };
+    document.getElementById("outputMessage").innerHTML="Submitting registration...";
+    setTimeout(()=>{
+        fetch(
+             "https://jsonplaceholder.typicode.com/posts",
+             {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(userData)
+             }
+        )
+        .then(response=>response.json())
+        .then(data=>{
+            document.getElementById("outputMessage")
+                .innerHTML =
+                "Registration submitted successfully!";
+            console.log(data);
+        })
+        .catch(error => {
+            document.getElementById("outputMessage")
+                .innerHTML =
+                "Registration failed!";
+            console.error(error);
+        },2000);
+    })
+}

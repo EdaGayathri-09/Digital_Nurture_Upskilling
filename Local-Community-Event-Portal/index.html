@@ -146,7 +146,7 @@
 
         <section id="register">
             <h1>Event Registration Form</h1>
-            <form id="registrationform" onsubmit="return showMessage(event)">
+            <form id="registrationform" onsubmit="showMessage(event);submitRegistration();">
                 <fieldset>
                     <legend>Details</legend>
                     <input type="text" id="name" placeholder="Enter your name" required autofocus>
