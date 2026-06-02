@@ -343,3 +343,61 @@ document.getElementById("eventInfo").innerHTML =
  Date:${date}
  Available seats:${seats}
  Fee:${fee}`;*/
+
+ //Exercise 11:Working with forms
+ /*
+ function showMessage(event){
+    event.preventDefault();
+    if(!validateRegistrationForm()){
+        return;
+    }
+    let form=document.getElementById("registrationform");
+    let name=form.elements["name"].value;
+    let email=form.elements["email"].value;
+    let eventType=form.elements["eventType"].value;
+    document.getElementById("outputMessage").innerHTML=
+        `Thank you ${name}! You have successfully registered for ${eventType}.`;
+ } 
+ */
+/*
+function validateRegistrationForm(){
+
+    let form =
+        document.getElementById("registrationform");
+
+    let name =
+        form.elements["name"].value;
+
+    let email =
+        form.elements["email"].value;
+
+    let eventType =
+        form.elements["eventType"].value;
+
+    let valid = true;
+
+    document.getElementById("nameError").innerHTML="";
+    document.getElementById("emailError").innerHTML="";
+    document.getElementById("eventError").innerHTML="";
+
+    if(name.trim()===""){
+        document.getElementById("nameError")
+            .innerHTML="Name is required";
+        valid=false;
+    }
+
+    if(email.trim()===""){
+        document.getElementById("emailError")
+            .innerHTML="Email is required";
+        valid=false;
+    }
+
+    if(eventType===""){
+        document.getElementById("eventError")
+            .innerHTML="Select an event";
+        valid=false;
+    }
+
+    return valid;
+}
+*/
