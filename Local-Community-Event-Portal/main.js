@@ -403,12 +403,14 @@ function validateRegistrationForm(){
 */
 //Exercise 12: AJAX and FetchAPI
 function submitRegistration(){
+    console.log("Registration started");
     let form= document.getElementById("registrationform");
     let userData={
         name: form.elements["name"].value,
         email: form.elements["email"].value,
         event: form.elements["eventType"].value
     };
+    console.log("Form Data:",userData);
     document.getElementById("outputMessage").innerHTML="Submitting registration...";
     setTimeout(()=>{
         fetch(
