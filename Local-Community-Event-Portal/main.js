@@ -438,3 +438,22 @@ function submitRegistration(){
         },2000);
     })
 }
+
+//Exercise 14: jQuery and JS Frameworks
+$(document).ready(function(){
+    //jQuery click event
+    $("#registerBtn").click(function(){
+        console.log("Register button clicked using jQuery");
+    });
+    //fade out event cards
+    $("#hideEventsBtn").click(function(){
+        $("#eventContainer").fadeOut();
+    });
+     //fade in event cards
+    $("#showEventsBtn").click(function(){
+        $("#eventContainer").fadeIn();
+    });
+});
+//Benefit of React/Vue:
+//They automatically update the UI when data changes
+//and make large applications easier to manage.

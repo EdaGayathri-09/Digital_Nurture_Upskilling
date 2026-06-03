@@ -23,6 +23,7 @@
             z-index:-1;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
@@ -102,6 +103,8 @@
                     <option value="Environment">Environment</option>
                     <option value="Health">Health</option>
                 </select>
+            <button id="hideEventsBtn">Hide Events</button>
+            <button id="showEventsBtn">Show Events</button>
             <div id="eventContainer"></div>
         </section>
 
@@ -160,7 +163,7 @@
                     </select>
                     <p id="eventInfo"></p>
                     <textarea id="message" placeholder="Enter your message"></textarea>   
-                    <button type="submit" onclick="showConfirmation()">Register</button>  
+                    <button type="submit" id="registerbtn" onclick="showConfirmation()">Register</button>  
                     <button type="clear" onclick="clearPreferences()">Clear Preferences</button>             
                 </fieldset>
                 <br>
